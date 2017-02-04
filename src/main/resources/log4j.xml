@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+ 
+<log4j:configuration debug="false"
+	xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<!-- OFF ,FATAL ,ERROR ,WARN ,INFO ,DEBUG ,ALL -->
+
+	<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%p | %t | %l | %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="debug" />
+			<param name="levelMax" value="error" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+	</appender>
+
+	<appender name="debugFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="../logs/spring-cloud-eureka-server/debugs/debug.log" />
+		<param name="Encoding" value="UTF-8" />
+		<param name="MaxFileSize" value="102400KB" />
+		<param name="MaxBackupIndex" value="15" />
+		<param name="Threshold" value="DEBUG" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %p | %l | %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="infoFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../logs/spring-cloud-eureka-server/infos/info.log" />
+		<param name="Encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'MM-dd'.log'" />
+		<param name="Append" value="true" />
+		<param name="Threshold" value="info" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %p | %t | %l | %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="warnFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../logs/spring-cloud-eureka-server/warns/warn.log" />
+		<param name="Encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'MM-dd'.log'" />
+		<param name="Append" value="true" />
+		<param name="Threshold" value="WARN" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %p | %t | %l | %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="errorFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../logs/spring-cloud-eureka-server/errors/error.log" />
+		<param name="Encoding" value="UTF-8" />
+		<param name="DatePattern" value="'.'MM-dd'.log'" />
+		<param name="Append" value="true" />
+		<param name="Threshold" value="ERROR" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %p | %t | %l | %m%n" />
+		</layout>
+	</appender>
+	
+
+	<root>
+		<priority value="info" />
+		<appender-ref ref="ConsoleAppender" />
+		<appender-ref ref="debugFile" />
+		<appender-ref ref="infoFile" />
+		<appender-ref ref="warnFile" />
+		<appender-ref ref="errorFile" />
+	</root>
+</log4j:configuration>
